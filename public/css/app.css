@@ -1,0 +1,2453 @@
+:root {
+    --bg-main: #ffffff;
+    --bg-secondary: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --primary-start: #22c55e;
+    --primary-end: #3b82f6;
+    --gradient-main: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-end) 100%);
+
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.7);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+
+    --nav-height: 80px;
+}
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-secondary);
+    color: var(--text-main);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Scroll Animation */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-reveal-delay-1 {
+    transition-delay: 0.1s;
+}
+
+.scroll-reveal-delay-2 {
+    transition-delay: 0.2s;
+}
+
+.scroll-reveal-delay-3 {
+    transition-delay: 0.3s;
+}
+
+.scroll-reveal-delay-4 {
+    transition-delay: 0.4s;
+}
+
+/* Background Grid Effect (Light Version) */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(100, 116, 139, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100, 116, 139, 0.15) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: 0 0, 0 0;
+    z-index: -1;
+    opacity: 0.5;
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* Ambient Background Blobs */
+.ambient-blob {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.blob-1 {
+    top: -100px;
+    left: -100px;
+    background: var(--primary-start);
+}
+
+.blob-2 {
+    bottom: -100px;
+    right: -100px;
+    background: var(--primary-end);
+}
+
+/* ================= GLASS HEADER (UPDATED) ================= */
+header {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 1200px;
+    z-index: 1000;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    width: 100%;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 55px;
+}
+
+.logo img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--text-main);
+}
+
+/* เน้นตัวหนาเมื่อ Active */
+.nav-menu a.active {
+    font-weight: 700;
+}
+
+/* สร้างขีดเส้นใต้ (รวมร่างจากที่คุณส่งมา) */
+.nav-menu a.active::after,
+.dropdown-trigger.active::after { /* เพิ่มให้ Services แสดงขีดด้วย */
+    content: '';
+    position: absolute;
+    bottom: -6px; /* ระยะห่างจากตัวอักษร */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-main);
+    border-radius: 2px;
+    animation: slideIn 0.3s ease; /* ใช้ Animation ที่คุณเขียนไว้ */
+}
+
+@keyframes slideIn {
+    from { width: 0; opacity: 0; }
+    to { width: 100%; opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+.lang-btn {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #eee;
+    padding: 5px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lang-btn.active {
+    background: var(--gradient-main);
+    color: white;
+    border: none;
+}
+
+/* Hero & Sections */
+section {
+    padding: 90px 24px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+    min-height: 85vh;
+    padding-top: 120px;
+}
+
+.hero-text h1 {
+    font-family: 'Outfit';
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.text-gradient {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn {
+    padding: 15px 35px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--gradient-main);
+    color: white;
+    box-shadow: 0 10px 20px rgba(34, 197, 94, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
+}
+
+/* Code Window */
+.hero-visual {
+    perspective: 1000px;
+}
+
+.code-window {
+    background: rgba(255, 255, 255, 0.4);
+    /* backdrop-filter: blur(10px); */
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 25px;
+    transform: rotateY(-10deg) rotateX(5deg);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+    transition: 0.6s ease;
+}
+
+.code-window:hover {
+    transform: rotateY(0) rotateX(0);
+}
+
+.window-header {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.red {
+    background: #ef4444;
+}
+
+.yellow {
+    background: #f59e0b;
+}
+
+.green {
+    background: #22c55e;
+}
+
+.code-content {
+    font-family: 'Consolas', monospace;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.kwd {
+    color: #9333ea;
+}
+
+.str {
+    color: #16a34a;
+}
+
+.func {
+    color: #2563eb;
+}
+
+.prop {
+    color: #d97706;
+}
+
+/* Glass Cards */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 24px;
+    transition: 0.4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.85);
+    border-color: var(--primary-start);
+}
+
+/* Tech Marquee */
+.marquee-container {
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.track {
+    display: flex;
+    gap: 25px;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+}
+
+.tech-card {
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    min-width: 170px;
+    white-space: nowrap;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ================= SERVICE ICON GRADIENT (UPDATED) ================= */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.service-card {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    transition: 0.6s ease;
+}
+
+.service-card:hover {
+    background: rgba(255, 255, 255, 0.7) !important;
+    transform: translateY(-10px);
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.15);
+}
+
+.service-card .service-window-header {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.service-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.service-card p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.products-section {
+    position: relative;
+}
+
+.section-kicker,
+.section-lead {
+    text-align: center;
+}
+
+.section-kicker {
+    color: #16a34a;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.section-lead {
+    max-width: 680px;
+    margin: 12px auto 0;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.product-card {
+    padding: 24px;
+    overflow: hidden;
+}
+
+.product-card-featured {
+    background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.32)) !important;
+}
+
+.product-shot {
+    aspect-ratio: 16 / 10;
+    margin: 0 0 24px;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 24px 55px rgba(15, 23, 42, 0.14);
+}
+
+.product-shot .service-window-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 12px 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.product-shot .service-window-header span {
+    margin-left: 8px;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.product-shot img {
+    width: 100%;
+    height: calc(100% - 35px);
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.product-card:hover .product-shot img {
+    transform: scale(1.04);
+}
+
+.product-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.product-meta .service-icon {
+    margin-bottom: 0;
+}
+
+.product-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.product-badges span {
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(34, 197, 94, 0.1);
+    color: #15803d;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.product-card h3 {
+    margin: 0;
+    font-size: 1.35rem;
+}
+
+.product-card p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+.product-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: grid;
+    gap: 10px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+.product-features i {
+    color: #16a34a;
+    margin-right: 8px;
+}
+
+.product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn-light {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.28);
+}
+
+.btn-light:hover {
+    transform: translateY(-3px);
+    background: white;
+}
+
+/* Portfolio Swiper */
+.portfolio-container {
+    max-width: 1200px;
+    margin: 50px auto 0;
+    padding: 0 20px;
+    position: relative;
+}
+
+.portfolioSwiper {
+    padding: 0 50px 50px;
+}
+
+.portfolioSwiper .swiper-slide {
+    height: auto;
+}
+
+.portfolio-item {
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 140px;
+    background: rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--text-muted);
+    transition: 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-image {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.portfolio-info {
+    padding: 20px;
+}
+
+
+.portfolio-info h5 {
+    margin: -1px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.portfolio-tag {
+    display: inline-block;
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--primary-start);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-top: 15px;
+    font-weight: 600;
+}
+.text-gradient {
+    background: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+/* Swiper Custom Styling */
+.portfolioSwiper .swiper-button-next,
+.portfolioSwiper .swiper-button-prev {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.portfolioSwiper .swiper-button-next:after,
+.portfolioSwiper .swiper-button-prev:after {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--text-primary);
+}
+
+.portfolioSwiper .swiper-button-next:hover,
+.portfolioSwiper .swiper-button-prev:hover {
+    background: var(--gradient-main);
+    transform: scale(1.1);
+}
+
+.portfolioSwiper .swiper-button-next:hover:after,
+.portfolioSwiper .swiper-button-prev:hover:after {
+    color: white;
+}
+
+.portfolioSwiper .swiper-pagination {
+    bottom: 10px;
+}
+
+.portfolioSwiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: rgba(100, 116, 139, 0.3);
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.portfolioSwiper .swiper-pagination-bullet-active {
+    background: var(--gradient-main);
+    width: 30px;
+    border-radius: 5px;
+}
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.slider-nav:hover {
+    background: var(--gradient-main);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slider-nav.prev {
+    left: 0;
+}
+
+.slider-nav.next {
+    right: 0;
+}
+
+.slider-nav.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(100, 116, 139, 0.3);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slider-dot.active {
+    background: var(--gradient-main);
+    width: 30px;
+    border-radius: 5px;
+}
+
+
+/* Trusted Clients */
+.clients-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 50px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.client-logo-card {
+    padding: 25px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.client-logo-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(59, 130, 246, 0.05));
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.client-logo-card:hover::before {
+    opacity: 1;
+}
+
+.client-logo-placeholder {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    transition: 0.3s;
+}
+
+.client-logo-card:hover .client-logo-placeholder {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+.client-logo-card img {
+    max-width: 100%;
+    max-height: 50px;
+    object-fit: contain;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.client-logo-card:hover img {
+    transform: scale(1.05);
+}
+
+/* About & CTA */
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.stat-card {
+    padding: 25px;
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 2.2rem;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cta-card {
+    background: var(--gradient-main) !important;
+    color: white;
+    text-align: center;
+    padding: 80px 40px;
+    border: none !important;
+}
+
+.cta-card h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* Contact Info */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 50px;
+    align-items: start;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: start;
+    gap: 20px;
+    padding: 17px;
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    min-width: 30px;
+}
+
+.contact-details h3 {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.contact-details p {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.contact-details a {
+    color: var(--primary-start);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.contact-details a:hover {
+    color: var(--primary-end);
+}
+
+/* Footer */
+footer {
+    position: relative;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+    margin-top: 80px;
+    overflow: hidden;
+}
+
+.footer-wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-end) 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);
+    opacity: 0.1;
+}
+
+.footer-content {
+    position: relative;
+    padding: 80px 24px 30px;
+    backdrop-filter: blur(10px);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr;
+    gap: 60px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* .logo-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: var(--gradient-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+} */
+
+.footer-section h3 {
+    margin: 0 0 25px 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--gradient-main);
+    border-radius: 2px;
+}
+
+.footer-section p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 0.9rem;
+    margin: 0 0 15px 0;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    padding: 1px 0;
+}
+
+.footer-link i {
+    font-size: 0.7rem;
+    color: var(--primary-start);
+    transition: transform 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--primary-start);
+    padding-left: 10px;
+}
+
+.footer-link:hover i {
+    transform: translateX(5px);
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item-footer {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.contact-icon-footer {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 10px;
+    background: var(--gradient-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    box-shadow: 0 2px 10px rgba(34, 197, 94, 0.2);
+}
+
+.contact-item-footer p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.contact-item-footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item-footer a:hover {
+    color: var(--primary-start);
+}
+
+.footer-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-start), var(--primary-end), transparent);
+    margin-bottom: 30px;
+    opacity: 0.3;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 60px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+.social-links a:hover {
+    background: var(--gradient-main);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(34, 197, 94, 0.3);
+}
+
+/* Transition Effects */
+.content-transition {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.content-hidden {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* Responsive Design */
+/* Tablet (Large) - 3 columns */
+@media (max-width: 1200px) and (min-width: 951px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+}
+
+/* Tablet (iPad) - Show 3 portfolio cards */
+@media (max-width: 950px) and (min-width: 601px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-visual {
+        display: none;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .slider-nav {
+        display: flex;
+    }
+
+    /* Portfolio Items - Tablet Responsive */
+    .portfolio-image {
+        height: 120px !important;
+        font-size: 2rem !important;
+    }
+
+    .portfolio-info {
+        padding: 15px !important;
+    }
+
+    .portfolio-info h5 {
+        font-size: 0.75rem !important;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .footer-logo {
+        justify-content: center;
+    }
+
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-links {
+        align-items: center;
+    }
+
+    .footer-contact {
+        align-items: center;
+    }
+
+    .contact-item-footer {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* Mobile - Show 2 portfolio cards */
+@media (max-width: 600px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-visual {
+        display: none;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .portfolioSwiper {
+        padding: 0 40px 40px;
+    }
+
+    .portfolioSwiper .swiper-button-next,
+    .portfolioSwiper .swiper-button-prev {
+        width: 35px;
+        height: 35px;
+    }
+
+    .portfolioSwiper .swiper-button-next:after,
+    .portfolioSwiper .swiper-button-prev:after {
+        font-size: 14px;
+    }
+
+    /* Portfolio Items - Responsive */
+    .portfolio-image {
+        height: 100px !important;
+        font-size: 1.8rem !important;
+    }
+
+    .portfolio-info {
+        padding: 12px !important;
+    }
+
+    .portfolio-info h5 {
+        font-size: 0.7rem !important;
+    }
+
+    .clients-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+
+    .client-logo-card {
+        padding: 10px;
+        min-height: auto;
+        height: auto;
+        aspect-ratio: 1 / 0.95;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* About Section - Responsive Stats */
+    #about .glass-card {
+        padding: 25px 20px !important;
+        max-width: 100% !important;
+    }
+
+    #about .stat-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+        margin-bottom: 20px !important;
+    }
+
+    #about .stat-grid h3 {
+        font-size: 1.5rem !important;
+    }
+
+    #about .stat-grid p {
+        font-size: 0.75rem !important;
+    }
+
+    #about h2 {
+        font-size: 1.3rem !important;
+    }
+
+    #about>.glass-card>div:last-child p {
+        font-size: 0.85rem !important;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        padding: 40px 20px 20px;
+    }
+
+    .footer-container {
+        /* เปลี่ยนจาก 1fr (แถวเดียว) เป็น 2 คอลัมน์สำหรับหัวข้อเล็กๆ */
+        grid-template-columns: 1fr; 
+        gap: 30px;
+    }
+
+    /* เน้นให้ทุกอย่างชิดซ้าย ไม่เอาแบบ Center */
+    .footer-section {
+        text-align: left; 
+    }
+
+    .footer-logo {
+        justify-content: flex-start; /* โลโก้ชิดซ้าย */
+    }
+
+    .footer-section h3::after {
+        left: 0; /* เส้นใต้หัวข้อเริ่มจากซ้าย */
+        transform: none;
+    }
+
+    .footer-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* แบ่งลิงก์เป็น 2 ฝั่งซ้ายขวาให้ดูไม่ยาวเกินไป */
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .footer-link {
+        justify-content: flex-start;
+        font-size: 0.9rem;
+    }
+
+    .footer-contact {
+        align-items: flex-start;
+    }
+
+    .contact-item-footer {
+        flex-direction: row; /* ให้ไอคอนกับข้อความอยู่บรรทัดเดียวกัน (ชิดซ้าย) */
+        text-align: left;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .contact-icon-footer {
+        width: 30px; /* ลดขนาดไอคอนลงหน่อยให้ดูคลีน */
+        height: 30px;
+        font-size: 0.8rem;
+        min-width: 30px;
+    }
+
+    .social-links {
+        justify-content: flex-start; /* โซเชียลชิดซ้าย */
+        gap: 10px;
+    }
+
+    .social-links a {
+        width: 38px;
+        height: 38px;
+        font-size: 0.9rem;
+    }
+
+    .footer-bottom {
+        margin-top: 30px;
+        padding-top: 20px;
+        text-align: left; /* ข้อความ Copyright ชิดซ้าย */
+        font-size: 0.8rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+}
+/*เพิ่มปุ่มโปรเจ็คของฉัน*/
+/* ===== Portfolio CTA ===== */
+.portfolio-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.btn-project {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    padding: 8px 18px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+.project-btn-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+}
+.contact-page {
+    text-align: center;
+    padding-top: 140px;
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 35px;
+    font-weight: 600;
+    color: var(--primary-start);
+}
+
+.contact-icons i {
+    margin-right: 8px;
+}
+
+.map-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+}
+
+.map-wrapper iframe {
+    width: 100%;
+    height: 400px;
+    border: 0;
+}
+/* ================= DROPDOWN MENU STYLE ================= */
+.dropdown-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.dropdown-trigger i {
+    transition: transform 0.3s ease;
+}
+
+.dropdown-wrapper:hover .dropdown-trigger i {
+    transform: rotate(180deg);
+    color: var(--primary-start); /* สีเขียวตามธีม */
+}
+
+/* กล่องเมนูย่อย */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    width: 260px;
+    background: rgba(255, 255, 255, 0.95); /* พื้นหลังกระจก */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 10px;
+    
+    /* ซ่อนไว้ก่อน */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: 999;
+}
+
+/* โชว์เมนูเมื่อเอาเมาส์ชี้ */
+.dropdown-wrapper:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(10px);
+}
+
+/* ลิงก์ด้านใน */
+.dropdown-menu a {
+    display: block;
+    padding: 12px 15px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.dropdown-menu a:hover {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(59, 130, 246, 0.1));
+    color: var(--primary-start);
+    transform: translateX(5px);
+}
+
+/* ซ่อนเส้นขีดล่างเดิม */
+.dropdown-menu a::after {
+    display: none !important;
+}
+/* #about ไม่จำเป็นต้องแก้แล้ว ใช้ค่า default หรือตามที่ตั้งไว้ */
+#about {
+    padding: 40px 0;
+}
+
+/* ===== ABOUT PAGE (GLASSMORPHISM & CENTERED) ===== */
+
+/* พื้นหลังและ Layout หลัก */
+.about-bg {
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+}
+
+/* --- HERO SECTION (About Us) --- */
+#about-hero {
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
+
+#about-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #333; /* สีเทาเข้ม */
+}
+
+#about-hero p {
+    color: #555; /* สีเทานุ่ม */
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* --- CARD ROW (กล่อง Vision/Mission) --- */
+.about-row {
+    max-width: 780px;
+    width: 100%;
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    padding: 30px;
+    margin-bottom: 20px;
+    
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.about-icon {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background: var(--gradient-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+    margin-top: 5px;
+}
+
+/* หัวข้อในการ์ด (Vision, Mission) - ขนาดเล็กกว่าหัวข้อหลัก */
+.about-row h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem; 
+    font-weight: 700;
+    color: #333;
+}
+
+.about-row p, .about-list {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =========================================
+   ส่วนที่เพิ่มใหม่: จัดการหัวข้อ "Why AlexiaSoft?"
+   ========================================= */
+
+/* เลือก h2 ที่อยู่ติดกับ .about-bg โดยตรง (ไม่ใช่ในกล่อง about-row) */
+.about-bg > h2 {
+    font-size: 2.5rem;    /* ขนาดเท่ากับ About Us ด้านบน */
+    font-weight: 700;
+    margin-top: 60px;     /* เพิ่มระยะห่างจากกล่องด้านบน */
+    margin-bottom: 15px;
+    color: #000000;          /* สีเทาเข้ม */
+    text-align: center;
+}
+
+/* เลือก p ที่อยู่ต่อจาก h2 ทันที (คำบรรยายใต้ Why AlexiaSoft) */
+.about-bg > h2 + p {
+    color: #555;          /* สีเทาอ่อน */
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 40px;  /* จัดกึ่งกลางและเว้นระยะล่าง */
+    text-align: center;
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .about-bg {
+        padding: 50px 20px;
+    }
+
+    .about-row {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        padding: 28px 24px;
+    }
+
+    .about-icon {
+        margin-bottom: 15px;
+        margin-top: 0;
+    }
+    
+    #about-hero h1,
+    .about-bg > h2 { /* ปรับขนาดทั้งคู่ในมือถือ */
+        font-size: 2rem;
+    }
+}
+
+/* หน้าผลงาน */
+/* จัดการระยะห่างและการสลับฟันปลา */
+.project-item {
+    margin-bottom: 120px;
+}
+
+/* ปรับให้สลับฝั่งที่ลำดับคี่ (1, 3, 5...) */
+/* โดยปกติ Flex จะเรียงซ้ายไปขวา (Text -> Image) */
+/* การใส่ row-reverse จะทำให้ลำดับคี่เป็น (Image -> Text) */
+.project-item:nth-child(odd) .project-content {
+    flex-direction: row-reverse;
+}
+
+.project-content {
+    display: flex;
+    align-items: center;
+    gap: 80px; /* เพิ่มช่องว่างระหว่างข้อความกับรูป */
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* --- ฝั่งข้อความ --- */
+.project-text-box {
+    flex: 1;
+    text-align: center; /* !!! จัดข้อความและปุ่มให้อยู่กึ่งกลางทั้งหมด !!! */
+    padding: 0 15px; /* กันข้อความชิดขอบจอเกินไปในมือถือ */
+}
+
+.project-text-box h3 {
+    font-size: 2.5rem; /* ปรับขนาดตามความเหมาะสม */
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #333;
+    /* text-align: center; ไม่ต้องใส่ตรงนี้แล้วเพราะใส่ที่ตัวแม่ (box) แล้ว */
+}
+
+.project-text-box p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 25px; /* !!! แก้ไข: ลบตัว 'ภ' ออก !!! */
+}
+
+/* --- ฝั่งรูปภาพ --- */
+.project-visual {
+    flex: 1.2;
+    position: relative;
+}
+
+/* จัดพื้นที่รูปภาพใหม่: บังคับความสูงคงที่เพื่อให้ทุกใบเท่ากัน */
+.image-stack {
+    position: relative;
+    width: 100%;
+    height: 400px; /* บังคับความสูงเท่ากันทุก Project */
+    display: block;
+}
+
+/* ปรับแต่งรูปภาพทั้งหลักและรอง */
+.img-main, .img-sub {
+    position: absolute;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: all 0.5s ease;
+    background: #fff;
+}
+
+/* รูปหลัก (แผ่นหลัง) */
+.img-main {
+    width: 80% !important;
+    height: 75% !important;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* รูปย่อย (แผ่นหน้า) */
+.img-sub {
+    width: 65% !important;
+    height: 75% !important;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    border: 6px solid #fff;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* --- การสลับตำแหน่งรูปภาพเมื่อเป็นแถวคู่ (Even) --- */
+/* เพื่อให้รูปสลับด้านกันสวยงามตามทิศทางของ Content */
+.project-item:nth-child(even) .img-main {
+    right: auto;
+    left: 0;
+}
+
+.project-item:nth-child(even) .img-sub {
+    left: auto;
+    right: 0;
+}
+
+/* --- เอฟเฟกต์ตอน Hover --- */
+.project-item:hover .img-main {
+    transform: translateY(-5px);
+}
+
+.project-item:hover .img-sub {
+    transform: translate(10px, -10px);
+}
+
+/* --- Responsive มือถือ --- */
+@media (max-width: 768px) {
+    .project-content {
+        flex-direction: column-reverse !important; /* มือถือให้รูปอยู่บน ข้อความอยู่ล่างเสมอ */
+        gap: 40px;
+    }
+    
+    .project-item {
+        margin-bottom: 80px;
+    }
+
+    .image-stack {
+        height: 300px;
+        max-width: 400px; /* จำกัดความกว้างรูปในมือถือไม่ให้ใหญ่เกิน */
+        margin: 0 auto; /* จัดรูปกลาง */
+    }
+    
+    .img-main { width: 85% !important; height: 80% !important; }
+    .img-sub { width: 70% !important; height: 80% !important; }
+
+    .project-text-box h3 {
+        font-size: 1.8rem;
+    }
+}
+.btn-consult {
+    display: inline-block;
+    padding: 12px 35px;
+    background: linear-gradient(135deg, #17eb92, #283ad9); /* ไล่เฉดม่วงไปชมพูแบบในปุ่มภาพที่ 2 */
+    color: #ffffff !important;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 4px 15px rgba(20, 211, 122, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-consult:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(118, 63, 247, 0.4);
+    filter: brightness(1.1);
+}
+/* ต่อ */
+/* =========================================
+   MOBILE RESPONSIVE (วางต่อท้ายโค้ดเดิม)
+   ========================================= */
+@media (max-width: 991px) {
+
+    /* 1. จัดคอนเทนเนอร์หลัก */
+    .project-item {
+        margin-bottom: 80px; /* ลดระยะห่างระหว่างโปรเจกต์ */
+        padding: 0 15px; /* กันขอบซ้ายขวา */
+    }
+
+    /* 2. ปรับ Layout เป็นแนวตั้ง และยกเลิกการสลับซ้ายขวา */
+    .project-content,
+    .project-item:nth-child(odd) .project-content,
+    .project-item:nth-child(even) .project-content {
+        flex-direction: column-reverse; /* เอารูปไว้บน ข้อความไว้ล่าง */
+        align-items: center;
+        gap: 40px;
+        text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
+    }
+
+    /* 3. ปรับส่วนข้อความ */
+    .project-text-box {
+        width: 100%;
+        padding: 0;
+    }
+
+    .project-text-box h3 {
+        font-size: 1.75rem; /* ปรับหัวข้อให้พอดีมือถือ */
+        margin-top: 10px;
+    }
+
+    /* 4. จัดการพื้นที่รูปภาพ (Container) */
+    .project-visual {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .image-stack {
+        width: 100%;
+        max-width: 380px; /* จำกัดความกว้างไม่ให้ล้นจอ */
+        height: 320px;    /* ลดความสูงลงจาก 400px เพื่อความสวยงาม */
+        margin: 0 auto;
+    }
+
+    /* 5. ปรับตำแหน่งรูปภาพภายใน (Reset ตำแหน่งให้เหมือนกันทุกการ์ด) */
+    
+    /* รูปหลัก (พื้นหลัง) */
+    .img-main, 
+    .project-item:nth-child(even) .img-main {
+        width: 85% !important;
+        height: 80% !important;
+        top: 0;
+        right: 0;   /* ยึดขวาเสมอ */
+        left: auto; /* ยกเลิกค่า left ของ desktop */
+    }
+
+    /* รูปรอง (ด้านหน้า) */
+    .img-sub,
+    .project-item:nth-child(even) .img-sub {
+        width: 70% !important;
+        height: 75% !important;
+        bottom: 0;
+        left: 0;    /* ยึดซ้ายเสมอ */
+        right: auto; /* ยกเลิกค่า right ของ desktop */
+        border-width: 4px; /* ลดขนาดขอบขาว */
+    }
+}
+
+/* ปรับเพิ่มเติมสำหรับจอมือถือเล็กมาก (iPhone SE / Older Android) */
+@media (max-width: 480px) {
+    .image-stack {
+        height: 260px; /* ลดความสูงลงอีก */
+    }
+    
+    .project-text-box h3 {
+        font-size: 1.5rem;
+    }
+}
+/* Lightbox Styles */
+.lightbox {
+    display: none; 
+    /* fixed จะทำให้มันลอยค้างอยู่ที่หน้าจอเดิม ไม่ว่าเราจะ Scroll ไปไกลแค่ไหน */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw; /* เต็มความกว้างหน้าจอ */
+    height: 100vh; /* เต็มความสูงหน้าจอ */
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 99999; /* มั่นใจว่าอยู่บนสุดแน่นอน */
+    
+    /* จัดรูปให้อยู่กึ่งกลางหน้าจอที่กำลังดูอยู่ */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 85vh; /* บังคับความสูงไม่ให้เกินหน้าจอที่มองเห็น */
+    object-fit: contain; /* โชว์รูปเต็มใบ ไม่โดนตัดแน่นอน */
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    
+    /* Animation ตอนเปิด */
+    transform: scale(0.8);
+    transition: transform 0.3s ease-out;
+}
+
+.lightbox.active .lightbox-content {
+    transform: scale(1);
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ปรับให้รูปใน Project Visual กดได้ */
+.project-visual img {
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+}
+
+.project-visual img:hover {
+    transform: scale(1.02);
+}
+/* สำหรับมือถือ */
+@media (max-width: 991px) {
+    .project-item:nth-child(even) .project-content,
+    .project-content {
+        flex-direction: column !important;
+        text-align: center;
+        gap: 40px;
+    }
+    .image-stack {
+        height: 300px;
+        width: 100%;
+    }
+}
+/* เส้นใต้สำหรับเมนูที่ Active */
+.nav-menu a.active, 
+.dropdown-wrapper.active .dropdown-trigger {
+    color: #22c55e !important;
+    position: relative;
+}
+
+/* สร้างเส้นใต้ Gradient */
+.nav-menu a.active::after,
+.dropdown-wrapper.active .dropdown-trigger::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; /* ระยะห่างจากตัวอักษรลงมา */
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+    border-radius: 10px;
+}
+/* =========================================
+   RESPONSIVE NAVBAR & FOOTER
+   (Add this to the bottom of app.css)
+   ========================================= */
+
+/* --- 1. Hamburger Button (ซ่อนบนจอคอม) --- */
+.hamburger {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #1e293b; /* หรือใช้ var(--text-main) ถ้ามี */
+    margin-left: auto; /* ดันไปขวาสุด */
+    padding: 0 15px;
+    z-index: 1001;
+}
+
+/* --- 2. Mobile & Tablet Styles (< 991px) --- */
+@media (max-width: 991px) {
+    /* ==== NAVBAR ==== */
+    .nav-container {
+        padding: 15px 20px;
+        position: relative;
+        justify-content: space-between;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        flex-direction: column;
+        padding: 10px 0; /* ปรับลด padding เพื่อความสวยงาม */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    /* จัดลิงก์เมนูหลักและปุ่ม Dropdown Trigger */
+    .nav-menu a, 
+    .dropdown-trigger {
+        position: relative; /* สำคัญ: เพื่อให้เส้นใต้เกาะไปกับตัวนี้ */
+        padding: 15px 25px;
+        font-size: 1.1rem;
+        display: block;
+        text-decoration: none;
+        color: #333;
+        border-bottom: 1px solid #f1f5f9; /* เส้นกั้นจางๆ ระหว่างเมนู */
+    }
+
+    /* --- ส่วนที่ทำให้เห็นขีดเส้นใต้สีเขียวเหมือนภาพที่ 2 --- */
+    /* เมื่อเมนูย่อยถูกเปิด (active) ให้เพิ่มขีดเส้นใต้ที่หัวข้อ */
+    .dropdown-wrapper.active > .dropdown-trigger::after,
+    .dropdown-wrapper.active > a::after {
+        content: "";
+        position: absolute;
+        bottom: 0; /* วางไว้ล่างสุดของหัวข้อพอดี */
+        left: 0;
+        width: 100%;
+        height: 3px; /* ความหนาของเส้นใต้ */
+        background-color: #22c55e; /* สีเขียว */
+        z-index: 2; /* ให้อยู่เหนือ border-bottom ปกติ */
+    }
+
+    /* เปลี่ยนสีตัวอักษรหัวข้อเมื่อเปิดเมนู */
+    .dropdown-wrapper.active > .dropdown-trigger,
+    .dropdown-wrapper.active > a {
+        color: #22c55e;
+        font-weight: 600;
+    }
+
+    /* ==== ปรับ Dropdown ย่อย (เหลี่ยมและไม่ทับเส้น) ==== */
+    .dropdown-menu {
+        position: static; /* ดันเนื้อหาลงมาข้างล่างเส้น */
+        display: none;
+        width: 100%;
+        background: #f8fafc; /* พื้นหลังสีเทาอ่อนให้ดูแยกจากเมนูหลัก */
+        
+        /* แก้ไขกรอบตามที่ต้องการ: เป็นเหลี่ยม ไม่มน */
+        border-radius: 0 !important; 
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        margin-top: 0; 
+    }
+
+    .dropdown-wrapper.active .dropdown-menu {
+        display: block;
+    }
+
+    /* ลิงก์ภายในเมนูย่อย */
+    .dropdown-menu a {
+        padding: 12px 45px !important; /* ดันข้อความเข้าไปข้างใน */
+        font-size: 1rem;
+        color: #666;
+        border-bottom: 1px solid #eee !important;
+        background: transparent !important;
+    }
+
+    /* เอาขีดเส้นใต้สีเขียวออกสำหรับลิงก์ย่อย */
+    .dropdown-menu a::after {
+        display: none !important;
+    }
+    .hamburger {
+        display: block; /* แสดงปุ่ม 3 ขีด */
+    }
+
+    /* ซ่อนปุ่มเปลี่ยนภาษาใน Navbar มือถือ (หรือจะย้ายไปใส่ใน nav-menu ก็ได้) */
+    .lang-switch {
+        display: none; 
+    }
+
+    /* ==== FOOTER ==== */
+    .footer-container {
+        flex-direction: column; /* เรียงลงแนวตั้ง */
+        text-align: center;
+        gap: 50px;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* จัดกึ่งกลาง */
+        width: 100%;
+    }
+
+    .footer-link {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .footer-section {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .footer-contact .contact-item-footer {
+        justify-content: center; /* ไอคอนและเบอร์โทรอยู่กลาง */
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* Animation เล็กน้อยตอนเปิดเมนู */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+@media (max-width: 991px) {
+    /* 1. จัดโครงสร้างเมนูหลัก */
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        flex-direction: column;
+        padding: 0; /* ลบ Padding เพื่อความเนียน */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        border-top: 1px solid #343536;
+        z-index: 9999;
+        max-height: 80vh; /* กันเมนูยาวเกินจอ */
+        overflow-y: auto; /* ให้เลื่อนดูได้ถ้าเมนูยาว */
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    /* 2. ลิงก์แต่ละตัว */
+    .nav-menu > a, 
+    .nav-menu .dropdown-trigger {
+        padding: 15px 25px;
+        border-bottom: 1px solid #f1f5f9;
+        width: 100%;
+        text-align: left;
+        color: #333;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between; /* ให้ลูกศรชิดขวา */
+        align-items: center;
+    }
+
+    /* 3. กล่อง Dropdown (สำคัญมาก: ต้องไม่ลอย) */
+    .dropdown-wrapper {
+        width: 100%;
+        display: block;
+    }
+
+    .dropdown-menu {
+        display: none; /* ซ่อนปกติ */
+        position: static !important; /* ให้เป็นเนื้อหาธรรมดา ดันตัวล่างลงไป */
+        width: 100%;
+        box-shadow: none !important;
+        border: none;
+        background-color: #f8fafc; /* พื้นหลังสีเทาอ่อน */
+        padding: 0;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* แสดงเมื่อมี class active */
+    .dropdown-wrapper.active .dropdown-menu {
+        display: block;
+    }
+
+    /* ลิงก์ข้างใน Dropdown */
+    .dropdown-menu a {
+        padding: 12px 25px 12px 40px; /* ย่อหน้าเข้าไป */
+        border-bottom: 1px solid rgba(55, 55, 80, 0.5); 
+        color: #64748b;
+        font-size: 0.95rem;
+        display: block;
+    }
+
+    /* หมุนลูกศร */
+    .dropdown-wrapper.active .dropdown-trigger i {
+        transform: rotate(180deg);
+        transition: 0.3s;
+    }
+}
+
+
+/* จัดระเบียบ Grid */
+.footer-container-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    text-align: left; /* เริ่มต้นจัดซ้ายสำหรับ Desktop */
+}
+
+/* ตั้งค่าลิงก์หลัก - ปรับสีให้สว่างเท่ากันหมด */
+.footer-main-link {
+    color:rgba(55, 55, 80, 0.5) !important; 
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.footer-main-link:hover {
+    color: #22c55e !important; /* สีเขียว Alexia */
+}
+
+.icon-static {
+    font-size: 0.7rem;
+    color: #22c55e;
+}
+
+.icon-arrow {
+    font-size: 0.6rem;
+    margin-left: 8px;
+    opacity: 0.6;
+}
+
+/* เมนูย่อย */
+.footer-sub-list {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 25px; 
+}
+
+.dropdown-group:hover .footer-sub-list {
+    max-height: 300px;
+    opacity: 1;
+    margin: 10px 0;
+}
+
+.footer-sub-list a {
+    color: rgba(72, 71, 71, 0.5) !important;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.footer-sub-list a:hover {
+    color: #22c55e !important;
+    padding-left: 5px;
+}
+
+/* --- Mobile Responsive --- */
+@media (max-width: 768px) {
+    .footer-container-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        /* ไม่ใช้ text-align: center ที่นี่เพื่อให้ข้อความเรียงแถวตรงกัน */
+        text-align: left; 
+    }
+
+    .footer-section-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* เปลี่ยนจาก center เป็น flex-start เพื่อให้หัวข้อตรงกัน */
+        width: fit-content;      /* ให้กล่องกว้างเท่ากับเนื้อหา */
+        margin: 0 auto;          /* สั่งให้กล่องเนื้อหาทั้งหมดไปอยู่กลางหน้าจอ */
+        min-width: 200px;        /* กำหนดความกว้างขั้นต่ำเพื่อให้แนวดูเท่ากัน */
+    }
+
+    .footer-main-link {
+        justify-content: flex-start; /* ให้ไอคอนกับข้อความชิดซ้ายในแถวของตัวเอง */
+        width: 100%;
+        padding: 8px 0;
+    }
+
+    /* จัดเมนูย่อยให้เยื้องซ้ายตามเมนูหลัก แต่อยู่ในแนวเดียวกัน */
+    .footer-sub-list {
+        padding-left: 20px !important; /* ให้เยื้องขวาหน่อยเพื่อให้รู้ว่าเป็นเมนูย่อย */
+        align-items: flex-start;
+        width: 100%;
+        opacity: 0;
+        transition: all 0.4s ease;
+    }
+
+    .dropdown-group:hover .footer-sub-list {
+        opacity: 1;
+        max-height: 500px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 5px;
+    }
+
+    .footer-sub-list a {
+        text-align: left;
+        padding: 4px 0;
+        width: 100%;
+    }
+
+    .footer-logo-img {
+        margin: 0 0 10px 0; /* โลโก้ชิดซ้ายตามเนื้อหา */
+    }
+    
+    .footer-link-stack {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* จัด Home, Portfolio, Contact ให้เรียงแถวตรงกัน */
+        width: 100%;
+        gap: 12px;
+    }
+
+    /* โชว์ไอคอนลูกศรเพื่อให้ดูเป็นระเบียบ */
+    .icon-static {
+        display: inline-block;
+        min-width: 15px;
+    }
+    
+    .icon-arrow {
+        margin-left: 15px !important;
+    }
+}
+
+.footer-company-name { 
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 1.1rem; 
+    margin: 5px 0 10px 0; 
+    font-weight: 600;
+}
+
+.footer-description { 
+    color: rgba(255,255,255,0.6); 
+    font-size: 0.85rem; 
+    line-height: 1.5; 
+    max-width: 250px; 
+    text-align: left; /* คำอธิบายก็ชิดซ้ายตามแนว */
+}
+
+/* Landing page: product-led first impression */
+#home.home-hero {
+    max-width: 1320px;
+    min-height: min(820px, 95svh);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(32px, 5vw, 90px);
+    padding: 135px 32px 70px;
+}
+#home .home-eyebrow {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #166534;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .17em;
+}
+#home .hero-text h1 {
+    max-width: 620px;
+    margin: 0 0 24px;
+    font-size: clamp(3rem, 5.3vw, 5.4rem);
+    line-height: 1.12;
+    letter-spacing: -.05em;
+}
+#home .hero-text > p {
+    max-width: 520px;
+    margin: 0;
+    color: #475569;
+    font-size: clamp(1rem, 1.45vw, 1.2rem);
+    line-height: 1.85;
+}
+#home .home-actions {display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px}
+#home .home-actions .btn {border-radius: 12px; padding: 15px 22px}
+#home .home-secondary {background: #fff; color: #0f172a; border: 1px solid #cbd5e1}
+#home .home-secondary:hover {border-color: #16a34a; transform: translateY(-3px)}
+#home .home-highlights {display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 38px; color: #475569; font-size: .86rem}
+#home .home-highlights i {color: #15803d; margin-right: 5px}
+#home .home-showcase {display: grid; grid-template-columns: 1fr 1fr; gap: 14px; perspective: none}
+#home .home-product {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 370px;
+    padding: 22px 22px 0;
+    text-decoration: none;
+    color: #0f172a;
+    border: 1px solid #bbdccb;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #e7f8ee, #fff 75%);
+    box-shadow: 0 22px 55px rgba(15, 23, 42, .1);
+    transition: transform .25s, box-shadow .25s;
+}
+#home .home-product:hover, #home .home-product:focus-visible {transform: translateY(-8px); box-shadow: 0 28px 65px rgba(15, 23, 42, .16)}
+#home .home-pos {margin-top: 52px; border-color: #c7d9f8; background: linear-gradient(145deg, #e8f1ff, #fff 75%)}
+#home .home-product-label {display: flex; justify-content: space-between; gap: 8px; color: #166534; font-size: .67rem; font-weight: 800; letter-spacing: .08em}
+#home .home-pos .home-product-label {color: #1d4ed8}
+#home .home-product strong {margin-top: 24px; font: 700 clamp(1.5rem, 2.4vw, 2.25rem) 'Outfit', sans-serif}
+#home .home-product-description {min-height: 3em; margin: 7px 0 20px; color: #475569; font-size: .83rem; line-height: 1.5}
+#home .home-product img {width: calc(100% + 44px); height: 200px; margin: auto -22px 0; object-fit: cover; object-position: top left; border-top: 1px solid #e2e8f0}
+.home-tech {max-width: 1200px; margin: 0 auto; padding: 16px 24px 44px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 28px; color: #475569; font-size: .88rem; font-weight: 700}
+.home-tech span:first-child {width: 100%; text-align: center; font-size: .7rem; letter-spacing: .14em; color: #166534}
+#products .product-card:first-child {border-color: #a7d7bb; box-shadow: 0 22px 55px rgba(22, 101, 52, .12)}
+#products .product-card:nth-child(2) {border-color: #c2d7f5}
+@media (max-width: 950px) {
+    #home.home-hero {grid-template-columns: 1fr; text-align: left; padding: 130px 24px 50px; min-height: 0}
+    #home .home-showcase {display: grid; max-width: 700px; width: 100%; margin: 0 auto}
+}
+@media (max-width: 600px) {
+    #home.home-hero {padding-top: 120px; gap: 30px}
+    #home .hero-text h1 {font-size: clamp(2.55rem, 10vw, 3.5rem)}
+    #home .home-showcase {gap: 10px}
+    #home .home-product {min-height: 270px; padding: 15px 15px 0; border-radius: 16px}
+    #home .home-pos {margin-top: 24px}
+    #home .home-product strong {font-size: 1.35rem; margin-top: 16px}
+    #home .home-product-description {font-size: .73rem}
+    #home .home-product img {height: 120px; width: calc(100% + 30px); margin-left: -15px; margin-right: -15px}
+    #home .home-highlights {justify-content: flex-start; margin-top: 24px}
+}
+@media (prefers-reduced-motion: reduce) {#home .home-product {transition: none}}
