@@ -75,6 +75,58 @@ function updateActiveNav() {
 window.addEventListener('scroll', updateActiveNav);
 window.addEventListener('load', updateActiveNav);
 
+const homeProductCarousel = document.querySelector('.home-product-carousel');
+if (homeProductCarousel) {
+    const slides = [...homeProductCarousel.querySelectorAll('.home-product')];
+    const showcase = homeProductCarousel.closest('.home-showcase');
+    const pagination = showcase.querySelector('.home-showcase-pagination');
+    const toggle = showcase.querySelector('.home-showcase-toggle');
+    const label = toggle.querySelector('span');
+    const icon = toggle.querySelector('i');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0;
+    let playing = !reducedMotion;
+    let timer;
+    const dots = slides.map((slide, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `แสดง ${slide.querySelector('strong').textContent}`);
+        dot.addEventListener('click', () => show(index));
+        pagination.append(dot);
+        return dot;
+    });
+    const updateToggle = () => {
+        label.dataset.en = playing ? 'Pause' : 'Play';
+        label.dataset.th = playing ? 'หยุด' : 'เล่น';
+        label.textContent = label.dataset[document.documentElement.lang === 'en' ? 'en' : 'th'];
+        icon.className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+    };
+    const restart = () => {
+        clearInterval(timer);
+        if (playing) timer = setInterval(() => show(current + 1), 3500);
+    };
+    const show = index => {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('is-active', i === current);
+            slide.classList.toggle('is-prev', i === (current + slides.length - 1) % slides.length);
+            slide.classList.toggle('is-next', i === (current + 1) % slides.length);
+            slide.tabIndex = i === current ? 0 : -1;
+        });
+        dots.forEach((dot, i) => dot.setAttribute('aria-current', i === current ? 'true' : 'false'));
+        restart();
+    };
+    showcase.querySelector('.home-showcase-prev').addEventListener('click', () => show(current - 1));
+    showcase.querySelector('.home-showcase-next').addEventListener('click', () => show(current + 1));
+    toggle.addEventListener('click', () => {
+        playing = !playing;
+        updateToggle();
+        restart();
+    });
+    updateToggle();
+    show(0);
+}
+
 // Portfolio Swiper
 const portfolioSwiper = new Swiper('.portfolioSwiper', {
     slidesPerView: 2,
