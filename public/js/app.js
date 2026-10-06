@@ -1,10 +1,18 @@
 // Lang Switcher with Animation
-function setLang(lang) {
+function setLang(lang, animate = true) {
+    document.documentElement.lang = lang;
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
     const activeBtn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
     if (activeBtn) activeBtn.classList.add('active');
 
     const content = document.getElementById('main-content');
+    if (!animate) {
+        document.querySelectorAll('[data-en]').forEach(el => {
+            el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.th;
+        });
+        return;
+    }
+
     content.classList.add('content-hidden');
 
     setTimeout(() => {
@@ -14,6 +22,8 @@ function setLang(lang) {
         content.classList.remove('content-hidden');
     }, 350);
 }
+
+setLang('th', false);
 
 // Scroll Reveal Animation
 const revealElements = () => {
@@ -224,4 +234,3 @@ function toggleMobileMenu() {
         document.querySelectorAll('.dropdown-wrapper').forEach(w => w.classList.remove('active'));
     }
 }
-

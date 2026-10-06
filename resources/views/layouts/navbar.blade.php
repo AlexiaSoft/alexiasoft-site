@@ -105,8 +105,8 @@ $isServicePage = request()->is('services*') || request()->routeIs('services.show
         </nav>
 
         <div class="lang-switch">
-            <button class="lang-btn active" onclick="setLang('en')">EN</button>
-            <button class="lang-btn" onclick="setLang('th')">TH</button>
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+            <button class="lang-btn active" onclick="setLang('th')">TH</button>
         </div>
     </div>
 </header>

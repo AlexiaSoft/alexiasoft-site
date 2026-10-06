@@ -15,6 +15,48 @@
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
+                    <span>minterp.alexiasoft.co</span>
+                </div>
+                <img src="{{ asset('images/products/minterp.png') }}" alt="MintERP ERP system landing page screenshot" loading="lazy">
+            </div>
+
+            <div class="product-meta">
+                <div class="service-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div>
+                    <div class="product-badges">
+                        <span>ERP</span><span>Accounting</span><span>Inventory</span>
+                    </div>
+                    <h3>MintERP</h3>
+                </div>
+            </div>
+
+            <p data-en="An ERP platform that connects purchasing, sales, inventory, accounting, and management reports in one place."
+                data-th="แพลตฟอร์ม ERP ที่เชื่อมงานจัดซื้อ ฝ่ายขาย สต็อก บัญชี และรายงานผู้บริหารไว้ในที่เดียว">
+                An ERP platform that connects purchasing, sales, inventory, accounting, and management reports in one place.
+            </p>
+
+            <ul class="product-features">
+                <li><i class="fa-solid fa-check"></i> <span data-en="Sales, warehouse, and accounting flow" data-th="เชื่อมงานขาย คลังสินค้า และบัญชี">Sales, warehouse, and accounting flow</span></li>
+                <li><i class="fa-solid fa-check"></i> <span data-en="Management dashboard" data-th="แดชบอร์ดสำหรับผู้บริหาร">Management dashboard</span></li>
+                <li><i class="fa-solid fa-check"></i> <span data-en="Customizable for business process" data-th="ปรับให้เข้ากับกระบวนการธุรกิจได้">Customizable for business process</span></li>
+            </ul>
+
+            <div class="product-actions">
+                <a href="https://minterp.alexiasoft.co/" target="_blank" rel="noopener" class="btn btn-primary">
+                    <span data-en="View MintERP" data-th="ดู MintERP">View MintERP</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <a href="#contact" class="btn btn-light">
+                    <span data-en="Request Demo" data-th="ขอเดโมระบบ">Request Demo</span>
+                </a>
+            </div>
+        </div>
+        <div class="glass-card product-card product-card-featured">
+            <div class="product-shot">
+                <div class="service-window-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
                     <span>mintpos.alexiasoft.co</span>
                 </div>
                 <img src="{{ asset('images/products/mintpos.png') }}" alt="MintPOS POS system landing page screenshot" loading="lazy">
@@ -58,35 +100,35 @@
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
-                    <span>minterp.alexiasoft.co</span>
+                    <span>minthrm-uat.alexiasoft.co</span>
                 </div>
-                <img src="{{ asset('images/products/minterp.png') }}" alt="MintERP ERP system landing page screenshot" loading="lazy">
+                <img src="{{ asset('images/products/minthrm.png') }}" alt="ภาพหน้าเว็บไซต์ Mint HRM แสดงระบบข้อมูลพนักงานและการลงเวลา" loading="lazy">
             </div>
 
             <div class="product-meta">
-                <div class="service-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="service-icon"><i class="fa-solid fa-users"></i></div>
                 <div>
                     <div class="product-badges">
-                        <span>ERP</span><span>Accounting</span><span>Inventory</span>
+                        <span>HRM</span><span>Payroll</span><span>Attendance</span>
                     </div>
-                    <h3>MintERP</h3>
+                    <h3>MintHRM</h3>
                 </div>
             </div>
 
-            <p data-en="An ERP platform that connects purchasing, sales, inventory, accounting, and management reports in one place."
-                data-th="แพลตฟอร์ม ERP ที่เชื่อมงานจัดซื้อ ฝ่ายขาย สต็อก บัญชี และรายงานผู้บริหารไว้ในที่เดียว">
-                An ERP platform that connects purchasing, sales, inventory, accounting, and management reports in one place.
+            <p data-en="An HRM and payroll system for Thai organizations, bringing employee records, attendance, leave, and payroll together."
+                data-th="ระบบ HRM และเงินเดือนสำหรับองค์กรไทย รวมข้อมูลพนักงาน การลงเวลา การลา และงานเงินเดือนไว้ในที่เดียว">
+                An HRM and payroll system for Thai organizations, bringing employee records, attendance, leave, and payroll together.
             </p>
 
             <ul class="product-features">
-                <li><i class="fa-solid fa-check"></i> <span data-en="Sales, warehouse, and accounting flow" data-th="เชื่อมงานขาย คลังสินค้า และบัญชี">Sales, warehouse, and accounting flow</span></li>
-                <li><i class="fa-solid fa-check"></i> <span data-en="Management dashboard" data-th="แดชบอร์ดสำหรับผู้บริหาร">Management dashboard</span></li>
-                <li><i class="fa-solid fa-check"></i> <span data-en="Customizable for business process" data-th="ปรับให้เข้ากับกระบวนการธุรกิจได้">Customizable for business process</span></li>
+                <li><i class="fa-solid fa-check"></i> <span data-en="Employee records and organization structure" data-th="ข้อมูลพนักงานและโครงสร้างองค์กร">Employee records and organization structure</span></li>
+                <li><i class="fa-solid fa-check"></i> <span data-en="Attendance, leave, and overtime" data-th="ลงเวลา การลา และ OT">Attendance, leave, and overtime</span></li>
+                <li><i class="fa-solid fa-check"></i> <span data-en="Thai payroll, tax, and social security" data-th="เงินเดือน ภาษี และประกันสังคม">Thai payroll, tax, and social security</span></li>
             </ul>
 
             <div class="product-actions">
-                <a href="https://minterp.alexiasoft.co/" target="_blank" rel="noopener" class="btn btn-primary">
-                    <span data-en="View MintERP" data-th="ดู MintERP">View MintERP</span>
+                <a href="https://minthrm-uat.alexiasoft.co/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <span data-en="View MintHRM" data-th="ดู MintHRM">View MintHRM</span>
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
                 <a href="#contact" class="btn btn-light">
