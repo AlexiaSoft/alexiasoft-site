@@ -4,8 +4,8 @@
         <h1 data-en="One team for <span class='text-gradient'>smarter business.</span>" data-th="เปลี่ยนงานที่ซับซ้อน ให้<span class='text-gradient'>ง่ายขึ้นด้วยซอฟต์แวร์</span>">
             One team for <span class="text-gradient">smarter business.</span>
         </h1>
-        <p data-en="Connect operations, sales, and people with MintERP, MintPOS, MintHRM, and software tailored to your team." data-th="เชื่อมงานบริหาร การขาย และบุคลากรด้วย MintERP, MintPOS, MintHRM และซอฟต์แวร์ที่ออกแบบให้เหมาะกับธุรกิจคุณ">
-            Connect operations, sales, and people with MintERP, MintPOS, MintHRM, and software tailored to your team.
+        <p data-en="Connect operations, sales, and people with MintERP, MintPOS, MintHRM, MintMetal, and software tailored to your team." data-th="เชื่อมงานบริหาร การขาย และบุคลากรด้วย MintERP, MintPOS, MintHRM, MintMetal และซอฟต์แวร์ที่ออกแบบให้เหมาะกับธุรกิจคุณ">
+            Connect operations, sales, and people with MintERP, MintPOS, MintHRM, MintMetal, and software tailored to your team.
         </p>
         <div class="home-actions">
             <a href="#products" class="btn btn-primary"><span data-en="Explore our products" data-th="ดูผลิตภัณฑ์">Explore our products</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
@@ -15,6 +15,7 @@
             <span><i class="fa-solid fa-check" aria-hidden="true"></i> MintERP</span>
             <span><i class="fa-solid fa-check" aria-hidden="true"></i> MintPOS</span>
             <span><i class="fa-solid fa-check" aria-hidden="true"></i> MintHRM</span>
+            <span><i class="fa-solid fa-check" aria-hidden="true"></i> MintMetal</span>
             <span><i class="fa-solid fa-check" aria-hidden="true"></i> <span data-en="Custom solutions" data-th="พัฒนาตามโจทย์ธุรกิจ">Custom solutions</span></span>
         </div>
     </div>
@@ -32,11 +33,17 @@
                 <span class="home-product-description" data-en="Simple sales. Clearer decisions." data-th="ขายง่าย เห็นข้อมูลชัด ตัดสินใจได้ไว">Simple sales. Clearer decisions.</span>
                 <img src="{{ asset('images/products/mintpos.png') }}" alt="ภาพหน้าเว็บไซต์ MintPOS" loading="lazy">
             </a>
-            <a class="home-product home-hrm is-prev" href="https://minthrm-uat.alexiasoft.co/" target="_blank" rel="noopener noreferrer" aria-label="MintHRM — ดูเว็บไซต์ผลิตภัณฑ์">
+            <a class="home-product home-hrm" href="https://minthrm.alexiasoft.co/" target="_blank" rel="noopener noreferrer" aria-label="MintHRM — ดูเว็บไซต์ผลิตภัณฑ์">
                 <span class="home-product-label"><span>03 / <span data-en="HUMAN RESOURCES" data-th="บริหารงานบุคคล">HUMAN RESOURCES</span></span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
                 <strong>MintHRM</strong>
                 <span class="home-product-description" data-en="People, time, and payroll in one place." data-th="จัดการพนักงาน เวลา และเงินเดือนในที่เดียว">People, time, and payroll in one place.</span>
                 <img src="{{ asset('images/products/minthrm.png') }}" alt="ภาพหน้าเว็บไซต์ MintHRM" loading="lazy">
+            </a>
+            <a class="home-product home-metal is-prev" href="https://mintmetal.alexiasoft.co/" target="_blank" rel="noopener noreferrer" aria-label="MintMetal — ดูเว็บไซต์ผลิตภัณฑ์">
+                <span class="home-product-label"><span>04 / <span data-en="METAL SHEET ERP" data-th="ERP สำหรับธุรกิจเมทัลชีท">METAL SHEET ERP</span></span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+                <strong>MintMetal</strong>
+                <span class="home-product-description" data-en="From sales to production and delivery." data-th="เชื่อมงานขาย วัตถุดิบ การผลิต และส่งมอบ">From sales to production and delivery.</span>
+                <img src="{{ asset('images/products/mintmetal.png') }}" alt="ภาพหน้าเว็บไซต์ MintMetal ระบบ ERP สำหรับธุรกิจเมทัลชีท" loading="lazy">
             </a>
         </div>
         <div class="home-showcase-pagination" aria-label="เลือกผลิตภัณฑ์"></div>

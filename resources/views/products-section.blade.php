@@ -100,7 +100,7 @@
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
-                    <span>minthrm-uat.alexiasoft.co</span>
+                    <span>minthrm.alexiasoft.co</span>
                 </div>
                 <img src="{{ asset('images/products/minthrm.png') }}" alt="ภาพหน้าเว็บไซต์ Mint HRM แสดงระบบข้อมูลพนักงานและการลงเวลา" loading="lazy">
             </div>
@@ -127,8 +127,50 @@
             </ul>
 
             <div class="product-actions">
-                <a href="https://minthrm-uat.alexiasoft.co/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <a href="https://minthrm.alexiasoft.co/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                     <span data-en="View MintHRM" data-th="ดู MintHRM">View MintHRM</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <a href="#contact" class="btn btn-light">
+                    <span data-en="Request Demo" data-th="ขอเดโมระบบ">Request Demo</span>
+                </a>
+            </div>
+        </div>
+        <div class="glass-card product-card product-card-featured">
+            <div class="product-shot">
+                <div class="service-window-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span>mintmetal.alexiasoft.co</span>
+                </div>
+                <img src="{{ asset('images/products/mintmetal.png') }}" alt="ภาพหน้าเว็บไซต์ MintMetal ระบบ ERP สำหรับธุรกิจเมทัลชีท" loading="lazy">
+            </div>
+
+            <div class="product-meta">
+                <div class="service-icon"><i class="fa-solid fa-industry"></i></div>
+                <div>
+                    <div class="product-badges">
+                        <span>ERP</span><span>Metal Sheet</span><span>Manufacturing</span>
+                    </div>
+                    <h3>MintMetal</h3>
+                </div>
+            </div>
+
+            <p data-en="An ERP platform for metal sheet businesses and steel processing factories, connecting sales, purchasing, raw materials, production, and delivery."
+                data-th="ระบบ ERP สำหรับธุรกิจเมทัลชีทและโรงงานแปรรูปเหล็ก เชื่อมงานขาย จัดซื้อ วัตถุดิบ การผลิต และส่งมอบไว้ในที่เดียว">
+                An ERP platform for metal sheet businesses and steel processing factories, connecting sales, purchasing, raw materials, production, and delivery.
+            </p>
+
+            <ul class="product-features">
+                <li><i class="fa-solid fa-check"></i> <span data-en="Quotations and order-specific product specifications" data-th="ใบเสนอราคาและสินค้าตามสเปกแต่ละออเดอร์">Quotations and order-specific product specifications</span></li>
+                <li><i class="fa-solid fa-check"></i> <span data-en="Coil, sheet, and warehouse management" data-th="จัดการวัตถุดิบ Coil / Sheet และคลังสินค้า">Coil, sheet, and warehouse management</span></li>
+                <li><i class="fa-solid fa-check"></i> <span data-en="Production tracking and delivery" data-th="ติดตามงานผลิตและการส่งมอบ">Production tracking and delivery</span></li>
+            </ul>
+
+            <div class="product-actions">
+                <a href="https://mintmetal.alexiasoft.co/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <span data-en="View MintMetal" data-th="ดู MintMetal">View MintMetal</span>
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
                 <a href="#contact" class="btn btn-light">

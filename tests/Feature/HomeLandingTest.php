@@ -12,6 +12,9 @@ class HomeLandingTest extends TestCase
             ->assertSee('One team for')
             ->assertSee('images/products/minterp.png')
             ->assertSee('images/products/mintpos.png')
+            ->assertSee('images/products/mintmetal.png')
+            ->assertSee('https://mintmetal.alexiasoft.co/')
+            ->assertSee('View MintMetal')
             ->assertSeeInOrder(['<section id="home"', '<section id="products"', '<section id="services"'], false);
     }
 }
